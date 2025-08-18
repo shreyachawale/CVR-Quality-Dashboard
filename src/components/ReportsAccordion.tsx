@@ -62,29 +62,51 @@ const getStatusColor = (status: string) => {
 
 export const ReportsAccordion: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [filter, setFilter] = useState<string>('all');
+
+  const filteredReports = mockReports.filter(report => 
+    filter === 'all' ? true : report.type === filter
+  );
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200/60 overflow-hidden">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full px-6 py-4 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-gray-200/60 flex items-center justify-between hover:from-slate-100 hover:to-blue-100 transition-colors duration-200"
-      >
-        <div className="flex items-center space-x-3">
-          <FileText className="text-gray-600" size={20} />
-          <div className="text-left">
-            <h3 className="text-lg font-semibold text-gray-800">Latest Reports</h3>
-            <p className="text-sm text-gray-600">Recent safety, quality, and production reports</p>
+      <div className="px-6 py-4 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-gray-200/60">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <FileText className="text-gray-600" size={20} />
+            <div className="text-left">
+              <h3 className="text-lg font-semibold text-gray-800">Latest Reports</h3>
+              <p className="text-sm text-gray-600">Recent safety, quality, and production reports</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="text-sm border border-gray-300 rounded-md px-2 py-1 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="all">All Types</option>
+              <option value="safety">Safety</option>
+              <option value="quality">Quality</option>
+              <option value="production">Production</option>
+              <option value="environmental">Environmental</option>
+            </select>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              <ChevronDown 
+                className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
+                size={20} 
+              />
+            </button>
           </div>
         </div>
-        <ChevronDown 
-          className={`text-gray-500 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
-          size={20} 
-        />
-      </button>
+      </div>
       
       {isExpanded && (
         <div className="divide-y divide-gray-200">
-          {mockReports.map((report) => (
+          {filteredReports.map((report) => (
             <div key={report.id} className="p-6 hover:bg-gray-50/50 transition-colors duration-150">
               <div className="flex items-start justify-between mb-3">
                 <h4 className="text-sm font-semibold text-gray-900">{report.title}</h4>
