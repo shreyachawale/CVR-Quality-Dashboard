@@ -89,8 +89,6 @@ function App() {
           <ReportsAccordion />
         </div>
 
-        <CustomerDataTable data={sampleData} />
-
         {/* Filter Panel */}
         {/* <div className="mb-8">
           <FilterPanel onFiltersChange={handleFiltersChange} />
