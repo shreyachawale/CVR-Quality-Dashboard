@@ -14,6 +14,7 @@ import {
   CheckCircle,
   AlertCircle 
 } from 'lucide-react';
+import CustomerDataTable, { sampleData } from './components/CustomerDataTable';
 
 function App() {
   const [filters, setFilters] = useState({});
@@ -34,7 +35,7 @@ function App() {
     },
     {
       title: 'Good Quality CVR',
-      value: '4.8',
+      value: '95%',
       change: '+0.2 from last quarter',
       trend: 'up' as const,
       icon: Shield,
@@ -86,37 +87,9 @@ function App() {
         {/* Secondary Content */}
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 mb-8">
           <ReportsAccordion />
-          
-          {/* Additional Stats Cards */}
-          {/* <div className="grid grid-cols-1 gap-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200/60 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Active Projects</h3>
-                <Zap className="text-blue-500" size={24} />
-              </div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">23</div>
-              <p className="text-sm text-gray-600">5 critical, 12 in progress, 6 completed</p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200/60 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Compliance Rate</h3>
-                <CheckCircle className="text-green-500" size={24} />
-              </div>
-              <div className="text-3xl font-bold text-green-600 mb-2">97.8%</div>
-              <p className="text-sm text-gray-600">All safety standards met</p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200/60 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Open Incidents</h3>
-                <AlertCircle className="text-orange-500" size={24} />
-              </div>
-              <div className="text-3xl font-bold text-orange-600 mb-2">3</div>
-              <p className="text-sm text-gray-600">2 minor, 1 under investigation</p>
-            </div>
-          </div> */}
         </div>
+
+        <CustomerDataTable data={sampleData} />
 
         {/* Filter Panel */}
         {/* <div className="mb-8">
